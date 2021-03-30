@@ -3,9 +3,10 @@ using OptionMonad.ValueOption;
 using OptionMonad.ValueOptionExtensions;
 using System;
 
-namespace OptionMonad.Tests
+namespace OptionMonad.Tests.ValueOptionExtensionsTests
 {
-    [Category("OptionExtensions")]
+    [Category("Option Extensions")]
+    [Category("Value Option")]
     public class DelegateExtensionsTests
     {
         [Test]
@@ -18,7 +19,7 @@ namespace OptionMonad.Tests
             var result = @delegate.SafeInvoke<string, int, int>("Test");
 
             // Assert
-            Assert.Multiple(() => 
+            Assert.Multiple(() =>
             {
                 Assert.That(result, Is.Not.Null);
                 Assert.That(result.IsSome(), Is.True);

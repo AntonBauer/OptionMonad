@@ -15,5 +15,17 @@ namespace OptionMonad.ValueOptionExtensions
                 return Option<TReturn, TError>.None();
             }
         }
+
+        public static Option<TReturn, TError> SafeInvoke<TReturn, TError>(this Func<TReturn> @delegate)
+        {
+            try
+            {
+                return @delegate().Some<TReturn, TError>();
+            }
+            catch
+            {
+                return Option<TReturn, TError>.None();
+            }
+        }
     }
 }

@@ -2,9 +2,10 @@ using NUnit.Framework;
 using OptionMonad.ValueOption;
 using OptionMonad.ValueOptionExtensions;
 
-namespace OptionMonad.Tests
+namespace OptionMonad.Tests.ValueOptionExtensionsTests
 {
-    [Category("OptionExtensions")]
+    [Category("Option Extensions")]
+    [Category("Value Option")]
     public class GeneralExtensionsTests
     {
         [Test]

@@ -1,15 +1,19 @@
 ﻿using NUnit.Framework;
+using OptionMonad.EmptyOption;
+using OptionMonad.EmptyOptionExtensions;
 using OptionMonad.ValueOption;
 using OptionMonad.ValueOptionExtensions;
 using System;
+using System.Linq.Expressions;
 
-namespace OptionMonad.Tests.ExtensionsTests
+namespace OptionMonad.Tests.ValueOptionExtensionsTests
 {
-    [Category("OptionExtensions")]
+    [Category("Option Extensions")]
+    [Category("Value Option")]
     public class BindingExtensionsTests
     {
         [Test]
-        public void BindSomeToPlainTest()
+        public void BindSomeToFuncTest()
         {
             // Arrange
             var option = "Hello there".Some<string, int>();
@@ -29,7 +33,7 @@ namespace OptionMonad.Tests.ExtensionsTests
         }
 
         [Test]
-        public void BindNoneToPlainTest()
+        public void BindNoneToFuncTest()
         {
             // Arrange
             var error = 42;
@@ -129,6 +133,79 @@ namespace OptionMonad.Tests.ExtensionsTests
                 Assert.That(actual, Is.InstanceOf<Option<int, int>>());
                 Assert.That(actual.IsNone(), Is.True);
                 Assert.That((actual as NoneOption<int, int>).Error, Is.EqualTo(error));
+            });
+        }
+
+        [Test]
+        public void BindSomeToSuccessfulActionTest()
+        {
+            // Arrange
+            var option = "Hello there".Some<string, int>();
+            Action<string> @delegate = str => Expression.Empty();
+
+            // Act
+            var actual = option.Bind(@delegate);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual, Is.Not.Null);
+                Assert.That(actual, Is.InstanceOf<EmptyOption<int>>());
+                Assert.That(actual.IsSome(), Is.True);
+            });
+        }
+
+        [Test]
+        public void BindSomeToErrorActionTest()
+        {
+            // Arrange
+            var option = "Hello there".Some<string, int>();
+            Action<string> @delegate = str => throw new Exception();
+
+            // Act
+            var actual = option.Bind(@delegate);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual, Is.Not.Null);
+                Assert.That(actual, Is.InstanceOf<EmptyOption<int>>());
+                Assert.That(actual.IsNone(), Is.True);
+            });
+        }
+
+        public void BindNoneToSuccessfulActionTest()
+        {
+            // Arrange
+            var option = 42.None<string, int>();
+            Action<string> @delegate = str => Expression.Empty();
+
+            // Act
+            var actual = option.Bind(@delegate);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual, Is.Not.Null);
+                Assert.That(actual, Is.InstanceOf<EmptyOption<int>>());
+                Assert.That(actual.IsNone(), Is.True);
+            });
+        }
+
+        public void BindNoneToErrorActionTest()
+        {
+            var option = 42.None<string, int>();
+            Action<string> @delegate = str => throw new Exception();
+
+            // Act
+            var actual = option.Bind(@delegate);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual, Is.Not.Null);
+                Assert.That(actual, Is.InstanceOf<EmptyOption<int>>());
+                Assert.That(actual.IsNone(), Is.True);
             });
         }
     }

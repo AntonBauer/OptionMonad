@@ -2,10 +2,11 @@
 using OptionMonad.ValueOptionExtensions;
 using System.Collections.Generic;
 
-namespace OptionMonad.Tests
+namespace OptionMonad.Tests.ValueOptionExtensionsTests
 {
-    [Category("OptionExtensions")]
-    public class ValueOptionExtensionsTests
+    [Category("Option Extensions")]
+    [Category("Value Option")]
+    public class BasicOptionExtensionsTests
     {
         [Test]
         [TestCaseSource(nameof(IsSomeTestCases))]
