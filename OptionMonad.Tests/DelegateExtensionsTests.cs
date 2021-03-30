@@ -20,7 +20,7 @@ namespace OptionMonad.Tests
             Assert.Multiple(() => 
             {
                 Assert.That(result, Is.Not.Null);
-                Assert.That(result, Is.InstanceOf<SomeOption<int, int>>());
+                Assert.That(result.IsSome(), Is.True);
                 Assert.That((result as SomeOption<int, int>).Value, Is.EqualTo(4));
             });
         }
@@ -38,7 +38,7 @@ namespace OptionMonad.Tests
             Assert.Multiple(() =>
             {
                 Assert.That(result, Is.Not.Null);
-                Assert.That(result, Is.InstanceOf<NoneOption<int, int>>());
+                Assert.That(result.IsNone(), Is.True);
                 Assert.That((result as NoneOption<int, int>).Error, Is.EqualTo(default(int)));
             });
         }
