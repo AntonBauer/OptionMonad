@@ -1,4 +1,4 @@
-﻿namespace OptionMonad
+﻿namespace OptionMonad.ValueOption
 {
     public class NoneOption<TValue, TError> : Option<TValue, TError>
     {
@@ -6,6 +6,6 @@
 
         private NoneOption(TError? error) => Error = error;
 
-        public static NoneOption<TValue, TError> Create(TError? error) => new NoneOption<TValue, TError>(error);
+        public static NoneOption<TValue, TError> Create(TError? error) => new(error);
     }
 }

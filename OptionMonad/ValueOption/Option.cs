@@ -1,4 +1,6 @@
-﻿namespace OptionMonad
+﻿using OptionMonad.ValueOption;
+
+namespace OptionMonad
 {
     public abstract class Option<TValue, TError>
     {

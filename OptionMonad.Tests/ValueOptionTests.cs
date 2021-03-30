@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using OptionMonad.ValueOption;
 
 namespace OptionMonad.Tests
 {

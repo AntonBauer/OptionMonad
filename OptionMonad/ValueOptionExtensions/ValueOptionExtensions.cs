@@ -1,4 +1,6 @@
-﻿namespace OptionMonad.ValueOptionExtensions
+﻿using OptionMonad.ValueOption;
+
+namespace OptionMonad.ValueOptionExtensions
 {
     public static class ValueOptionExtensions
     {

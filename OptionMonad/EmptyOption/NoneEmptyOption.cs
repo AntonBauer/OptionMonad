@@ -6,6 +6,6 @@
 
         private NoneEmptyOption(TError? error) => Error = error;
 
-        public static NoneEmptyOption<TError> Create(TError? error) => new NoneEmptyOption<TError>(error);
+        public static NoneEmptyOption<TError> Create(TError? error) => new(error);
     }
 }

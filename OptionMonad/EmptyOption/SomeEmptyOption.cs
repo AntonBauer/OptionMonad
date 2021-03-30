@@ -6,6 +6,6 @@ namespace OptionMonad.EmptyOption
     {
         private SomeEmptyOption() => Expression.Empty();
 
-        public static SomeEmptyOption<TError> Create() => new SomeEmptyOption<TError>();
+        public static SomeEmptyOption<TError> Create() => new();
     }
 }
