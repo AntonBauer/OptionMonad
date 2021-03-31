@@ -34,8 +34,6 @@ jobs:
     - uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.NUGET_API_KEY}}
 
     - name: Build release
       run: dotnet build -c Release
@@ -44,4 +42,4 @@ jobs:
       run: dotnet pack -c Release
 
     - name: Publish to NuGet
-      run: dotnet nuget push OptionMonad/bin/Release/.*nupkg
+      run: dotnet nuget push "**/*.nupkg" -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
